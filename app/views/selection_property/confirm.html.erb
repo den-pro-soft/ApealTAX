@@ -1,0 +1,296 @@
+<section class="body">
+	<div class="row">
+		<div class="col">
+			<section class="card form-wizard" id="w4">
+				<%= form_tag({:action => 'sales'}, {:method => 'POST'}) do %>
+					<header class="card-header">
+					</header>
+					<div class="card-body">
+						<div class="wizard-progress wizard-progress-lg">
+							<div class="steps-progress">
+								<div class="progress-indicator"></div>
+							</div>
+							<ul class="nav wizard-steps">
+								<li class="nav-item ">
+									<a class="nav-link" href="#w4-property" data-toggle="tab"><span>1</span>Select Property</a>
+								</li>
+								<li class="nav-item active">
+									<a class="nav-link" href="#w4-confirm" data-toggle="tab"><span>2</span>Confirm Data</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#w4-sales" data-toggle="tab"><span>3</span>Sales Info</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#w4-exemption" data-toggle="tab"><span>4</span>Exemptions</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#w4-save" data-toggle="tab"><span>5</span>Save Property</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div id="w4-confirm" class="tab-pane active">
+								<div id="content">
+									<div id = "confirm_maps">
+										<section class="card">
+											<div class="card-body">
+												<div class="thumb-info mb-3">
+													<%= image_tag @property.s3_property_image %>
+													<div class="thumb-info-title">
+														<span class="thumb-info-inner"><%= @property.fulladdress %></span>
+														<span class="thumb-info-type">PIN: <%= @property.pin %></span>
+													</div>
+												</div>
+												<div class="widget-content-expanded">
+													<ul>
+													  <li><%= @property.fulladdress %></li>
+													  <li>PIN: <%= @property.pin %></li>
+													  <li>Township: <%= @property.township %></li>
+													  <li><%= session[:case_id]%></li>
+													</ul>
+												</div>
+												<div class="thumb-info mb-3">
+													<img src="img/map.jpg" class="rounded img-fluid" alt="John Doe">
+												</div>
+											</div>
+											<hr class="dotted short">
+											<div class="clearfix"></div>
+											<hr class="dotted short">
+										</section>
+									</div>
+									<div  id = "confirm_table">
+										<div >
+											<section class="card">
+												<div class="card-body">
+													<div>
+														<h2 class="card-title">Manage your Name, ID and Email Addresses</h2>
+														<span>Please review all property attributes below. If all attributes are correct - please press Next at bottom of form
+														<br></span>
+														<span>If you find any correction, please press CHANGE to correct the item, then select Next.</span>
+													</div>
+													<table class="table table-responsive-md mb-0">
+														<tbody>
+															<tr>
+																<td><h4>Number of apartments</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['apt_desc'] : @property.apt_desc%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-6">
+																			<div class="col-lg-12">
+																				<%= text_field_tag :apt_desc, "", value: session[:user_property] ?session[:user_property]['apt_desc'] : @property.apt_desc, class: 'form-control'%>
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Exterior construction</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['ext_desc'] : @property.ext_desc%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-6">
+																			<div class="col-lg-12">
+																				<%= text_field_tag :ext_desc, "", value: session[:user_property] ?session[:user_property]['ext_desc'] : @property.ext_desc, class: 'form-control'%>
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Full baths</h4></td>
+																	<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['full_bath'] : @property.full_bath%></h4></td>
+																	<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-6">
+																			<div class="col-lg-12">
+																				<%= number_field_tag :full_bath, "", value: session[:user_property] ?session[:user_property]['full_bath'] : @property.full_bath, class: 'form-control'%>	
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>1/2 baths</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['half_bath'] : @property.half_bath%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-6">
+																			<div class="col-lg-12">
+																				<%= number_field_tag :half_bath, "", value: session[:user_property] ?session[:user_property]['half_bath'] : @property.half_bath, class: 'form-control'%>				
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Basement condition</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['bsmt_desc'] : @property.bsmt_desc%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-9">
+																			<div class="col-lg-12">
+																				<%= select_tag "bsmt_desc", 
+																				options_for_select([ 
+																					"Full and apartment", 
+																					"Full and Formal Rec. Room", 
+																					"Full and Unfinished", 
+																					"None", 
+																					"Partial and Formal Rec. Room", 
+																					"Slab and Unfinished",
+																					"Crawl and Unfinished",
+																					"Partial and Unfinished"], session[:user_property] ?session[:user_property]['bsmt_desc'] : @property.bsmt_desc), 
+																				:class =>"form-control mb-3"
+																				%>							
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Attic condition</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['attic_desc'] : @property.attic_desc%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-9">
+																			<div class="col-lg-12">
+																				<%= select_tag "attic_desc", 
+																				options_for_select([ 
+																					"Full and apartment", 
+																					"Full and living area", 
+																					"Full and Unfinished", 
+																					"None", 
+																					"Partial and apartment", 
+																					"Partial and Unfinished"], session[:user_property] ?session[:user_property]['attic_desc'] : @property.attic_desc), 
+																				:class =>"form-control mb-3"
+																				%>										
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Air Conditioning</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['ac'] : @property.ac%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-9">
+																			<div class="col-lg-12">
+																				<%= number_field_tag :ac, "", value: session[:user_property] ?session[:user_property]['ac'] : @property.ac, class: 'form-control'%>				
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Fireplaces</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['fireplace'] : @property.fireplace%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-9">
+																			<div class="col-lg-12">
+																				<%= number_field_tag :fireplace, "", value: session[:user_property] ?session[:user_property]['fireplace'] : @property.fireplace, class: 'form-control'%>				
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Garage type</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['gar_desc'] : @property.gar_desc%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-9">
+																			<div class="col-lg-12">
+																				<%= select_tag "gar_desc", 
+																				options_for_select([ 
+																					"1 Car Attached", 
+																					"1 Car Detached", 
+																					"1 1/2 Car Detached", 
+																					"1 1/2 Car Attached", 
+																					"2 Cars Attached", 
+																					"2 Cars Detached",
+																					"2 1/2 Car Detached",
+																					"2 1/2 Car Attached",
+																					"3 Cars Attached", 
+																					"3 Cars Detached",
+																					"3 1/2 Car Detached",
+																					"3 1/2 Car Attached",
+																					"4 Cars Attached",
+																					"4 Car Detached"], session[:user_property] ?session[:user_property]['gar_desc'] : @property.gar_desc), 
+																				:class =>"form-control mb-3"
+																				%>									
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Building SF</h4></td>
+																<td class="confirm_data"><h4><%=  session[:user_property] ?session[:user_property]['building_sq_ft'] : @property.building_sq_ft%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-9">
+																			<div class="col-lg-12">
+																				<%= number_field_tag :building_sq_ft, "", value: session[:user_property] ?session[:user_property]['building_sq_ft'] : @property.building_sq_ft, class: 'form-control'%>			
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Land SF</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['land_sq_ft'] : @property.land_sq_ft%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-9">
+																			<div class="col-lg-12">
+																				<%= number_field_tag :land_sq_ft, "", value: session[:user_property] ?session[:user_property]['land_sq_ft'] : @property.land_sq_ft, class: 'form-control'%>		
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><h4>Age(built)</h4></td>
+																<td class="confirm_data"><h4><%= session[:user_property] ?session[:user_property]['age'] : @property.age%></h4></td>
+																<td class="actions">
+																	<div class="form-group row">
+																		<div class="col-lg-9">
+																			<div class="col-lg-12">
+																				<%= number_field_tag :age, "", value: session[:user_property] ?session[:user_property]['age'] : @property.age, class: 'form-control'%>			
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+													<div class ="buttons">
+														<button type="button" id = "edit_data" class="mb-1 mt-1 mr-1 btn btn-warning">Edit Data</button>
+														<button type="button" id = "revert" class="mb-1 mt-1 mr-1 btn btn-warning">Revert</button>
+														<%= submit_tag  "Correct - Next Step" ,:id=> "correct_data", :class=>"mb-1 mt-1 mr-1 btn btn-primary" %>
+														<%= submit_tag "Save - Next Step" ,:id=> "save_data" ,:class=>"mb-1 mt-1 mr-1 btn btn-primary" %>
+													</div>
+												</div>
+											</section>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<ul class="col-lg-6">
+							<li class="previous disabled" id = "button_previous">
+								<%= link_to 'Previous', { :action => :index } , :class => "mb-1 mt-1 mr-1 btn btn-danger" %>
+							</li>
+							<li class="next" id = "button_next">
+								<%= submit_tag  "Next" ,:id=> "next_button", :class=>"mb-1 mt-1 mr-1 btn btn-success" %>
+							</li>
+						</ul>
+					</div>
+				<% end %>
+			</section>
+		</div>
+	</div>
+</section>

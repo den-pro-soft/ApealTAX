@@ -1,0 +1,116 @@
+<section class="body">
+	<div class="row">
+		<div class="col">
+			<section class="card form-wizard" id="w4">
+				<header class="card-header">
+				</header>
+				<div class="card-body">
+					<div class="wizard-progress wizard-progress-lg">
+						<div class="steps-progress">
+							<div class="progress-indicator"></div>
+						</div>
+						<ul class="nav wizard-steps">
+							<li class="nav-item active">
+								<a class="nav-link" href="#w4-property" data-toggle="tab"><span>1</span>Select Property</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#w4-confirm" data-toggle="tab"><span>2</span>Confirm Data</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#w4-sales" data-toggle="tab"><span>3</span>Sales Info</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#w4-exemption" data-toggle="tab"><span>4</span>Exemptions</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#w4-save" data-toggle="tab"><span>5</span>Save Property</a>
+							</li>
+						</ul>
+					</div>
+					<div class="tab-content">
+						<div id="w4-property" class="tab-pane active">
+							<%= form_tag({:action => 'index'}, {:method => 'POST'}) do %>
+								<div id = "input_property">
+									<p><!-- react-text: 237 -->Please provide <!-- /react-text --><strong>either</strong><!-- react-text: 239 --> your <!-- /react-text --><strong>P</strong><!-- react-text: 241 -->roperty <!-- /react-text --><strong>I</strong><!-- react-text: 243 -->ndex <!-- /react-text --><strong>N</strong><!-- react-text: 245 -->umber <!-- /react-text --><strong>or</strong><!-- react-text: 247 --> your address and click ‘<!-- /react-text --><strong>search</strong><!-- react-text: 249 -->’<!-- /react-text --></p>
+									<p style="padding-bottom: 10px;"><i> This system is only available for Cook County, IL.</i></p>	
+									<div class="form-group row">
+										<div class="property_input">
+											<div class="property_input">
+												<p>Enter your property address to get started</p>
+												<%= radio_button_tag(:search, 'property', @check == 'property') %>
+												<%= text_field_tag :address_property, "", value: @search_data_property, class: 'form-control' , disabled: @check!= 'property'%>
+											</div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="property_input">
+											<div class="property_input">
+												<p>Or, if you know your property PIN, you can enter here</p>
+												<%= radio_button_tag(:search, 'pin', @check == 'pin') %>
+												<%= text_field_tag :address_pin, "", value: @search_data_pin, class: 'form-control',disabled: @check!= 'pin'%>
+											</div>
+										</div>
+									</div>
+									<%= submit_tag "Search" ,:class=>"mb-1 mt-1 mr-1 btn btn-primary btn-block" %>
+								</div>
+							<% end %>
+								<div class="col-lg-12" id = "search_data">
+									<section class="card">
+										<div class="card-body">
+											<table class="table table-responsive-md mb-0" >
+												<thead>
+													<tr>
+														<th></th>
+														<th>PIN</th>
+														<th>Township</th>
+														<th>Address</th>
+														<th>Status</th>
+														<th></th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													<% unless @properties.nil? %>
+														<% @properties.each do |property| %>
+															<%= form_tag({:action => 'confirm'}, {:method => 'POST'}) do %>
+																<tr>
+																	<td><%= image_tag property.s3_property_image , style:"height: 50px; width: 50px;"%></td>
+																	<td><%= property.pin %></td>
+																	<%= hidden_field_tag 'property_id', property.id  %>
+																	<td><%= property.township %></td>
+																	<td><%= property.fulladdress %></td>
+																	<td>Available</td>
+																	<td><%= submit_tag "+" ,:class=>"mb-1 mt-1 mr-1 btn btn-warning" %></td>
+																</tr>
+															<% end %>
+														<% end %>
+													<% end %>
+												</tbody>
+											</table>
+										</div>
+									</section>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="card-footer">
+					<ul class="col-lg-6">
+						<li class="previous disabled" id = "button_previous">
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-danger">Previous</button>
+						</li>
+						<li class="finish hidden float-right" id = "button_finish">
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-success">Finish</button>
+						</li>
+						<li class="next" id = "button_next">
+							<% unless session[:property_id].nil? %>
+								<%= link_to 'Next', { :action => :confirm } , :class => "mb-1 mt-1 mr-1 btn btn-success" %>
+							<% else %>
+								<%= link_to 'Next', { :action => :index }, :class => "mb-1 mt-1 mr-1 btn btn-success" %>
+							<% end %>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</div>
+</section>

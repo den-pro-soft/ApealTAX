@@ -1,0 +1,364 @@
+<section class="body">
+	<div class="row">
+		<div class="col">
+			<section class="card form-wizard" id="w4">
+				<%= form_tag({:action => 'exemptions'}, {:method => 'POST'}) do %>
+					<header class="card-header">
+					</header>
+					<div class="card-body">
+						<div class="wizard-progress wizard-progress-lg">
+							<div class="steps-progress">
+								<div class="progress-indicator"></div>
+							</div>
+							<ul class="nav wizard-steps">
+								<li class="nav-item ">
+									<a class="nav-link" href="#w4-property" data-toggle="tab"><span>1</span>Select Property</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#w4-confirm" data-toggle="tab"><span>2</span>Confirm Data</a>
+								</li>
+								<li class="nav-item active">
+									<a class="nav-link" href="#w4-sales" data-toggle="tab"><span>3</span>Sales Info</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#w4-exemption" data-toggle="tab"><span>4</span>Exemptions</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#w4-save" data-toggle="tab"><span>5</span>Save Property</a>
+								</li>
+							</ul>
+						</div>
+						<div id="w4-sales" class="tab-pane">
+							<div class="col-lg-12"  id = "detail_property">
+								<section class="card">
+									<h2 class="card-title">Provide your property type details</h2>
+									<header class="card-header">
+										<p class="card-subtitle">Condominium Information</p>
+									</header>
+									<div class="card-body">
+										<div >
+											<div >
+												<label>
+													<span>Is this a condominium?</span>
+													<%= radio_button_tag('condominium', 'correct', session[:sales_data] ? session[:sales_data]['condominium'] == 'correct': false ) %>
+													<span>YES</span>
+													<%= radio_button_tag('condominium', 'incorrect', session[:sales_data] ? session[:sales_data]['condominium'] == 'incorrect': true) %>
+													<span>NO</span>
+												</label>
+											</div>
+										</div>
+										<div id = "condo_association">
+											<div class="radio">
+												<label>
+													<span>Are you going to appeal as an entire condo association?</span>
+													<%= radio_button_tag('condoAssociation', 'Yes',session[:sales_data] ? session[:sales_data]['condoAssociation'] == 'Yes': false) %>
+													<span>YES</span>
+													<%= radio_button_tag('condoAssociation', 'No',session[:sales_data] ? session[:sales_data]['condoAssociation'] == 'No': true) %>
+													<span>NO</span>
+												</label>
+											</div>
+											<div id = "association_data">
+												<div class="form-group row">
+													<label class="col-lg-3 control-label" for="inputDefault">Name of the Association</label>
+													<div class="col-lg-12">
+														<%= text_field_tag :associationName, "", placeholder: "Name of the Association", value: session[:sales_data] ?session[:sales_data]['associationName'] : '', class: 'form-control' %>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-6 control-label" for="inputDefault">Contact Person for Association</label>
+													<div class="col-lg-12">
+														<%= text_field_tag :contact, "", placeholder: "Contact Person for Association", value: session[:sales_data] ?session[:sales_data]['contact'] : '', class: 'form-control' %>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-6 control-label ">Phone number for Association contact</label>
+													<div class="col-lg-12" id = "phone">
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="fa fa-phone"></i>
+															</span>
+															<%= text_field_tag :phone_number, "", placeholder: "(123) 123-1234", data:{ mask:"(999) 999-9999" }, value: session[:sales_data] ?session[:sales_data]['phone_number'] : '' , class: 'form-control' %>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div>
+											<label>
+												<span>Are there additional PIN numbers?</span>
+												<%= radio_button_tag('hadAdditionalPins', 'Yes',session[:sales_data] ? session[:sales_data]['hadAdditionalPins'] == 'Yes': false) %>
+												<span>YES</span>
+												<%= radio_button_tag('hadAdditionalPins', 'No',session[:sales_data] ? session[:sales_data]['hadAdditionalPins'] == 'No': true) %>
+												<span>NO</span>
+											</label>
+										</div>
+										<div id="pin_number">
+											<div id="addtion_pins" class="form-group row">
+												<div class="col-lg-4">
+													<label class="col-lg-3 control-label" for="inputDefault">PIN1</label>
+													<div class="col-lg-12">
+														<%= text_field_tag :pin1, "", placeholder: "PIN1", value: session[:sales_data] ?session[:sales_data]['pin1'] : '',class: 'form-control' %>
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<label class="col-lg-3 control-label" for="inputDefault">PIN2</label>
+													<div class="col-lg-12">
+														<%= text_field_tag :pin2, "", placeholder: "PIN2", value: session[:sales_data] ?session[:sales_data]['pin2'] : '' ,class: 'form-control' %>
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<label class="col-lg-3 control-label" for="inputDefault">PIN3</label>
+													<div class="col-lg-12">
+														<%= text_field_tag :pin3, "", placeholder: "PIN3", value: session[:sales_data] ?session[:sales_data]['pin3'] : '',class: 'form-control' %>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+
+
+							<div class="col-lg-12" id="sales_info">
+								<section class="card">
+									<h2 class="card-title">Sales information</h2>
+									<header class="card-header">
+										<p class="card-subtitle">Purchase Information</p>
+									</header>
+									<div class="card-body">
+										<div>
+											<div class="radio">
+												<label>
+													<span>Was this Property Purchased in the last Five Years?</span>
+													<%= radio_button_tag('purchasedFiveYears', 'Yes', session[:sales_data] ? session[:sales_data]['purchasedFiveYears'] == 'Yes': false) %>
+													<span>YES</span>
+													<%= radio_button_tag('purchasedFiveYears', 'No', session[:sales_data] ? session[:sales_data]['purchasedFiveYears'] == 'No': true) %>
+													<span>NO</span>
+												</label>
+											</div>
+										</div>
+										<div id="purchase_info">
+											<div class="form-group row">
+												<label class="col-lg-6 control-label ">Purchase Price (estimated price is acceptable)</label>
+												<div class="col-lg-12">
+													<%= text_field_tag :purchasePrice, "", placeholder: "$0.00", value: session[:sales_data] ?session[:sales_data]['purchasePrice'] : '', class: 'form-control' %>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-lg-6 control-label ">Purchase date (estimated dates are acceptable)</label>
+												<div class="col-lg-12">
+													<div class="input-group">
+														<span class="input-group-addon">
+															<i class="fa fa-calendar"></i>
+														</span>
+														<%= text_field_tag :purchaseDate, "",  data:{ provide:'datepicker' }, value: session[:sales_data] ?session[:sales_data]['purchaseDate'] : '' , class: 'form-control' %>
+													</div>
+												</div>
+											</div>
+											<div class="radio">
+												<label>
+													<span>Was it a distressed sale? (foreclosure, short-sale, off-market sale)</span>
+													<%= radio_button_tag('distressedSale', 'correct',session[:sales_data] ? session[:sales_data]['distressedSale'] == 'correct': false) %>
+													<span>YES</span>
+													<%= radio_button_tag('distressedSale', 'incorrect',session[:sales_data] ? session[:sales_data]['distressedSale'] == 'incorrect': false) %>
+													<span>NO</span>
+													<%= radio_button_tag('distressedSale', 'I do not know',session[:sales_data] ? session[:sales_data]['distressedSale'] == 'I do not know': false) %>
+													<span>I do not know</span>
+												</label>
+											</div>
+											<h4>Upload purchase documents (Executed sales contract, HUD and recorded deed)</h4>
+											<span>If you have your purchase documents ready, upload now – or we will remind you to upload later.</span>
+											<br>
+											<span>If you do not have these available please contact your realtor</span>
+											<div class="col-lg-3" style = "margin:auto">
+												<!--<form action="/upload" class="dropzone dz-square" id="dropzone-example">
+												</form>-->
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+							<div class="col-lg-12" id="refinance_info">
+								<section class="card">
+									<header class="card-header">
+										<p class="card-subtitle">Refinance Information</p>
+									</header>
+									<div class="card-body">
+										<div>
+											<div class="radio">
+												<label>
+													<span>Was this Property Refinanced in the last Five Years?</span>
+													<%= radio_button_tag('refinancedFive', 'Yes', session[:sales_data] ? session[:sales_data]['refinancedFive'] == "Yes": false) %>
+													<span>YES</span>
+													<%= radio_button_tag('refinancedFive', 'No', session[:sales_data] ? session[:sales_data]['refinancedFive'] == "No": true) %>
+													<span>NO</span>
+												</label>
+											</div>
+										</div>
+										<div id = "refinance_data">
+											<div class="form-group row">
+												<span>When was the most recent refinance? (month/year – estimated date is acceptable)</span>
+
+												<div class="col-lg-12">
+													<div class="input-group">
+														<span class="input-group-addon">
+															<i class="fa fa-calendar"></i>
+														</span>
+														<%= text_field_tag :mostRecentRefinance, "",  data:{ provide:'datepicker' }, value: session[:sales_data] ?session[:sales_data]['mostRecentRefinance'] : '' , class: 'form-control' %>
+													</div>
+												</div>
+											</div>
+											<div>
+												<div class="form-group row">
+													<span>What was the appraised value at the time of refinance? (estimated value is acceptable)</span>
+													<div class="col-lg-12">
+														<%= text_field_tag :appraisedValueRefinance, "", placeholder: "$0.00", value: session[:sales_data] ?session[:sales_data]['appraisedValueRefinance'] : '', class: 'form-control' %>
+													</div>
+												</div>
+											</div>
+											<div class="form-group row">
+												<div class = "col-lg-12">
+													<span >What was the interest rate term(rate/term)? (estimated rate/term is acceptable)</span>
+												</div>
+												<div class="col-lg-4">
+													<%= text_field_tag :interestRate, "", placeholder: "rate", value: session[:sales_data] ?session[:sales_data]['interestRate'] : '', class: 'form-control' %>
+												</div>
+												<div class="col-lg-4">
+													<%= select_tag "interestTerm", 
+														options_for_select([ 
+															"30 yr", 
+															"15 yr", 
+															"1/7 arm", 
+															"1/5 arm"],session[:sales_data] ? session[:sales_data]['interestTerm']: ''),
+														include_blank: 'term',
+														:class =>"form-control"
+													%>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+							<div class="col-lg-12"  id="vacancy_info">
+								<section class="card">
+									<header class="card-header">
+										<p class="card-subtitle">Vacancy Information</p>
+									</header>
+									<div class="card-body">
+										<div>
+											<div class="radio">
+												<label>
+													<span>Was the property ever vacant during your ownership for more than 3 months? (fire, flood, rehab)</span>
+													<br>
+													<%= radio_button_tag('vacancy', 'Yes',session[:sales_data] ? session[:sales_data]['vacancy'] == 'Yes': false) %>
+													<span>YES</span>
+													<%= radio_button_tag('vacancy', 'No',session[:sales_data] ? session[:sales_data]['vacancy'] == 'No': true) %>
+													<span>NO</span>
+												</label>
+												<div id = "vacancy_list">
+													<div class="col-lg-12">
+														<%= select_tag "vacancy3months", 
+														options_for_select([ 
+															"GutRehab", 
+															"Decrepit/uninhabitable", 
+															"fire/flood",],session[:sales_data] ? session[:sales_data]['vacancy3months']: ''),
+														include_blank: 'Vacancies', 
+														:class =>"form-control"
+														%>
+													</div>
+												</div>
+											</div>
+											<div class="radio">
+												<label>
+													<span>Was the property torn down?</span>
+													<%= radio_button_tag('tornDown', 'correct',session[:sales_data] ? session[:sales_data]['tornDown'] == 'correct': false) %>
+													<span>YES</span>
+													<%= radio_button_tag('tornDown', 'incorrect',session[:sales_data] ? session[:sales_data]['tornDown'] == 'incorrect': true) %>
+													<span>NO</span>
+												</label>
+												<div id= "torn_down_info">
+													<div class="form-group row">
+														<label class="col-lg-12 control-label ">When?</label>
+														<div class="col-lg-4">
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<i class="fa fa-calendar"></i>
+																</span>
+																<%= text_field_tag :torn_down, "",  data:{ provide:'datepicker' }, value: session[:sales_data] ?session[:sales_data]['torn_down'] : '' , class: 'form-control' %>
+															</div>
+														</div>
+													</div>
+													<div class="radio">
+														<label>
+															<span>Was the property rebuilt?</span>
+															<%= radio_button_tag('property_rebuilt', 'correct',session[:sales_data] ? session[:sales_data]['property_rebuilt'] == 'correct': false) %>
+															<span>YES</span>
+															<%= radio_button_tag('property_rebuilt', 'incorrect', session[:sales_data] ? session[:sales_data]['property_rebuilt'] == 'incorrect': true) %>
+															<span>NO</span>
+														</label>
+														<div id = "rebuilt_info">
+															<label class="col-lg-12 control-label ">When?</label>
+															<div class="col-lg-4">
+																<div class="input-group">
+																	<span class="input-group-addon">
+																		<i class="fa fa-calendar"></i>
+																	</span>
+																	<%= text_field_tag :rebuiltDate, "",  data:{ provide:'datepicker' }, value: session[:sales_data] ?session[:sales_data]['rebuiltDate'] : '' , class: 'form-control' %>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-lg-12">
+								<section class="card">
+									<header class="card-header">
+										<p class="card-subtitle">Future Home Sale</p>
+									</header>
+									<div class="card-body">
+										<div class="col-lg-12">
+											<div class="radio">
+												<label>
+													<span>When are you planning on selling your house?</span>
+												</label>
+											</div>
+											<%= select_tag "sellingHouseDate", 
+												options_for_select([ 
+													"0-6 months", 
+													"6-12 months", 
+													"12-6 months",
+													"1 year to 3 years",
+													"3 years or more",
+													"Not planning on selling"],session[:sales_data] ? session[:sales_data]['sellingHouseDate']: ''),
+												:include_blank => "Select One",
+												:class =>"form-control"
+											%>	
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+						<div class="card-footer">
+							<ul class="col-lg-6">
+								<li class="previous disabled" id = "button_previous">
+									<%= link_to 'Previous', { :action => :confirm } , :class => "mb-1 mt-1 mr-1 btn btn-danger" %>
+								</li>
+								<li class="finish hidden float-right" id = "button_finish">
+									<button type="button" class="mb-1 mt-1 mr-1 btn btn-success">Finish</button>
+								</li>
+								<li class="next" id = "button_next">
+									<%= submit_tag "Next" ,:class=>"mb-1 mt-1 mr-1 btn btn-success" %>
+								</li>
+							</ul>
+						</div>
+					</div>
+				<% end %>
+			</section>
+		</div>
+	</div>
+</section>

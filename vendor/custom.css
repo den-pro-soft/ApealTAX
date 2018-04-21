@@ -1,0 +1,183 @@
+/* Add here all your CSS customizations */
+body{
+	color:#777;
+}
+.form-wizard{
+	margin-top:60px;
+}
+.card-body{
+	background: #fbfbfb;
+}
+.form-group.row{
+	margin-left:0px;
+	margin-right:0px;
+}
+.logo-container img{
+	max-width: 190px;
+	height:auto;
+}
+#button_previous{
+	float:left;
+}
+#button_next{
+	float:right;
+}
+#button_finish{
+	float:right;
+}
+#w4-property{
+	width:70%;
+	margin-left:auto;
+	margin-right:auto;
+}
+#w4-property #input_property{
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+}
+#w4-confirm{
+	width:80%;
+	margin:auto;
+}
+#w4-confirm #content{
+	display:flex;
+}
+#w4-confirm .buttons{
+	margin-left:40%;
+}
+#w4-confirm #revert{
+	display:none;
+}
+#w4-confirm #save_data{
+	display:none;
+}
+#w4-sales{
+	width:60%;
+	margin:auto;
+	text-align:left!important;
+}
+#w4-sales #condo_association{
+	display:none;
+}
+#w4-sales #association_data{
+	display:none;
+}
+#w4-sales #pin_number{
+	display:none;
+}
+#w4-sales #purchase_info{
+	display:none;
+}
+#w4-sales #refinance_data{
+	display:none;
+}
+#w4-sales #vacancy_list{
+	display:none;
+}
+#w4-sales #torn_down_info{
+	display:none;
+}
+#w4-sales #rebuilt_info{
+	display:none;
+}
+#w4-exemption{
+	width:60%;
+	margin:auto;
+	text-align:left!important;
+}
+#w4-exemption #born_date{
+	display:none;
+}
+.property_input{
+	padding-right:0px!important;
+	padding-left:0px!important;
+	width:100%;
+}
+.property_input>#search_property ,.property_input>#search_pin{
+	position:absolute;
+	margin-left:-20px;
+	margin-top:13px;
+}
+.card-footer .pager{
+	width:40%;
+	margin:auto;
+}
+#search{
+	margin-top:30px!important;
+}
+#confirm_maps, #confirm_table{
+	margin-left:auto;
+	margin-right:auto;
+}
+#confirm_maps{
+	flex:3;
+	margin-right:50px;
+}
+#confirm_table{
+	flex:8;
+}
+#confirm_table > div{
+	margin:auto;
+}
+#search_data{
+ 	width:70%;
+ 	margin:auto;
+}
+#search_data td{
+	line-height:45px;
+	text-align:left!important;
+}
+#w4-sales span{
+	margin-right:10px;
+}
+#w4-sales .input-group-addon{
+	margin-right:0px;
+}
+#w4-sales .col-lg-12 {
+	padding:0px;
+}
+#w4-sales .col-lg-4 {
+	padding-left:0px;
+}
+#w4-sales #detail_property{
+	margin-bottom:30px;
+}
+#w4-sales #sales_info{
+	margin-bottom:30px;
+}
+#w4-sales #refinance_info{
+	margin-bottom:30px;
+}
+#w4-sales #vacancy_info{
+	margin-bottom:30px;
+}
+.card-subtitle{
+	color: rgb(65, 131, 196);
+	font-size:14px;
+}
+#w4-save{
+	width:50%;
+	margin:auto;
+}
+#contact_descript{
+	width:70%;
+	margin:auto;
+}
+#agreement_payment{
+	width:40%;
+	margin:auto;
+	margin-top:30px;
+	display:flex;
+}
+#agreement_payment>div{
+	margin:auto;
+}
+.card-title{
+	margin-bottom:10px;
+}
+.card-footer li{
+	list-style: none
+}
+.card-footer ul{
+	margin:auto;
+}

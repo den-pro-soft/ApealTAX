@@ -1,0 +1,101 @@
+<section class="body">
+	<div class="row">
+		<div class="col">
+		<%= form_tag({:action => 'save'}, {:method => 'POST'}) do %>
+			<section class="card form-wizard" id="w4">
+				<div class="card-body">
+					<div class="wizard-progress wizard-progress-lg">
+						<div class="steps-progress">
+							<div class="progress-indicator"></div>
+						</div>
+						<ul class="nav wizard-steps">
+							<li class="nav-item ">
+								<a class="nav-link" href="#w4-property" data-toggle="tab"><span>1</span>Select Property</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#w4-confirm" data-toggle="tab"><span>2</span>Confirm Data</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#w4-sales" data-toggle="tab"><span>3</span>Sales Info</a>
+							</li>
+							<li class="nav-item active">
+								<a class="nav-link" href="#w4-exemption" data-toggle="tab"><span>4</span>Exemptions</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#w4-save" data-toggle="tab"><span>5</span>Save Property</a>
+							</li>
+						</ul>
+					</div>
+					<div class="tab-content">
+						<div id="w4-exemption" class="tab-pane active">
+							<div class="col-lg-12">
+								<section class="card">
+									<h2 class="card-title">Exemption Information</h2>
+									<div class="card-body">
+										<div>
+											<div class="radio1" style = "margin-bottom:10px">
+												<label>
+													<span>Is this your primary residence?</span>
+													<br>
+													<br>
+													<%= radio_button_tag('primaryResidence', 'correct', session[:exemption_data] ? session[:exemption_data]['primaryResidence'] == "correct": true) %>
+													<span>YES</span>
+													<%= radio_button_tag('primaryResidence', 'incorrect', session[:exemption_data] ? session[:exemption_data]['primaryResidence'] == "incorrect": false) %>
+													<span>NO</span>
+												</label>
+											</div>
+											<div id="exemptionOnAnotherProperty">
+												<label>
+													<span style = "margin-bottom:20px;">Do you claim an exemption on another property in any other state?</span>
+													<br>
+													<br>
+													<%= radio_button_tag('exemptionOnAnotherProperty', 'correct', session[:exemption_data] ? session[:exemption_data]['exemptionOnAnotherProperty'] == "correct": false) %>
+													<span>YES</span>
+													<%= radio_button_tag('exemptionOnAnotherProperty', 'incorrect', session[:exemption_data] ? session[:exemption_data]['exemptionOnAnotherProperty'] == "incorrect": true) %>
+													<span>NO</span>
+												</label>
+											</div>
+											<div class="over65">
+												<label>
+													<span style = "margin-bottom:20px;">Are you, your spouse, or other effective owner who resides in the home as their primary residence over 65?</span>
+													<br>
+													<br>
+													<%= radio_button_tag('over65', 'correct', session[:exemption_data] ? session[:exemption_data]['over65'] == "correct": false) %>
+													<span>YES</span>
+													<%= radio_button_tag('over65', 'incorrect', session[:exemption_data] ? session[:exemption_data]['over65'] == "incorrect": true) %>
+													<span>NO</span>
+												</label>
+												<div class="form-group row" id ="born_date">
+													<div class="col-lg-6" style = "padding:0px">
+														<label style = "padding:0px" class="col-lg-6 control-label" for="inputDefault">What year were you born?</label>
+														<div class="col-lg-12" style = "padding:0px">
+															<%= text_field_tag :yearBorn, "", placeholder: "yyyy", value: session[:exemption_data] ? session[:exemption_data]['yearBorn'] : '', class: 'form-control' %>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<ul class="col-lg-6">
+						<li class="previous disabled" id = "button_previous">
+							<%= link_to 'Previous', { :action => :sales } , :class => "mb-1 mt-1 mr-1 btn btn-danger" %>
+						</li>
+						<li class="finish hidden float-right" id = "button_finish">
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-success">Finish</button>
+						</li>
+						<li class="next" id = "button_next">
+							<%= submit_tag "Next" ,:class=>"mb-1 mt-1 mr-1 btn btn-success" %>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<% end %>
+		</div>
+	</div>
+</section>

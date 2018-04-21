@@ -1,0 +1,134 @@
+/* Add here all your CSS customizations */
+body{
+	color:#777;
+}
+.card-body{
+	background: #fbfbfb;
+}
+.form-group.row{
+	margin-left:0px;
+	margin-right:0px;
+}
+.logo-container img{
+	max-width: 190px;
+	height:auto;
+}
+#w4-property{
+	width:70%;
+	margin-left:auto;
+	margin-right:auto;
+}
+#w4-property #input_property{
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+}
+#w4-profile{
+	width:80%;
+	margin:auto;
+}
+#w4-profile #content{
+	display:flex;
+}
+#w4-billing{
+	width:60%;
+	margin:auto;
+	text-align:left!important;
+}
+#w4-confirm{
+	width:60%;
+	margin:auto;
+	text-align:left!important;
+}
+.property_input{
+	padding-right:0px!important;
+	padding-left:0px!important;
+	width:100%;
+}
+.property_input>#optionsRadios1{
+	position:absolute;
+	margin-left:-20px;
+	margin-top:13px;
+}
+.property_input>#optionsRadios2{
+	position:absolute;
+	margin-left:-20px;
+	margin-top:13px;
+}
+.card-footer .pager{
+	width:40%;
+	margin:auto;
+}
+#search{
+	margin-top:30px!important;
+}
+#confirm_maps, #confirm_table{
+	margin-left:auto;
+	margin-right:auto;
+}
+#confirm_maps{
+	flex:3;
+	margin-right:50px;
+}
+#confirm_table{
+	flex:8;
+}
+#confirm_table > div{
+	margin:auto;
+}
+#search_data{
+ 	width:70%;
+ 	margin:auto;
+}
+#search_data td{
+	line-height:45px;
+	text-align:left!important;
+}
+#w4-billing span{
+	margin-right:10px;
+}
+#w4-billing .input-group-addon{
+	margin-right:0px;
+}
+#w4-billing .col-lg-12 {
+	padding:0px;
+}
+#w4-billing .col-lg-4 {
+	padding-left:0px;
+}
+#w4-billing #detail_property{
+	margin-bottom:30px;
+}
+#w4-billing #sales_info{
+	margin-bottom:30px;
+}
+#w4-billing #refinance_info{
+	margin-bottom:30px;
+}
+#w4-billing #vacancy_info{
+	margin-bottom:30px;
+}
+.card-subtitle{
+	color: rgb(65, 131, 196);
+	font-size:14px;
+}
+#w4-save{
+	width:50%;
+	margin:auto;
+}
+#contact_descript{
+	width:70%;
+	margin:auto;
+}
+#agreement_payment{
+	width:40%;
+	margin:auto;
+	margin-top:30px;
+	display:flex;
+}
+#agreement_payment>div{
+	margin:auto;
+}
+.card-title{
+	margin-bottom:10px;
+}

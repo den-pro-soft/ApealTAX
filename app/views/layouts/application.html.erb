@@ -1,0 +1,29 @@
+<!doctype html>
+<html class="fixed">
+  <head>
+    <title>Form Wizard | Porto Admin - Responsive HTML5 Template 2.0.0</title>
+    <meta charset="UTF-8">
+	<!-- Basic -->
+	<meta name="keywords" content="HTML5 Admin Template" />
+	<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+	<meta name="author" content="okler.net">
+
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <%= csrf_meta_tags %>
+
+	<!-- Web Fonts  -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+  </head>
+
+  <body>
+    <%= render 'layouts/header' %>
+    <%= yield %>
+  </body>
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</html>
